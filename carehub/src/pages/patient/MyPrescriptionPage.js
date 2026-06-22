@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../config";
 
 function MyPrescriptionPage() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function MyPrescriptionPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/patient/prescriptions/${user.user_id}`)
+      .get(`${API_URL}/patient/prescriptions/${user.user_id}`)
       .then((res) => setPrescriptions(res.data))
       .catch((err) => console.log(err));
   }, []);

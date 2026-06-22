@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../config";
 import { Button } from "@mui/material";
 
 import { Box, Typography, Grid } from "@mui/material";
@@ -29,7 +30,7 @@ function PatientVitalsPage() {
   useEffect(() => {
 
   const fetchVitals = () => {
-    fetch("http://localhost:5000/api/cloud-vitals")
+    fetch(`${API_URL}/cloud-vitals`)
       .then(res => res.json())
       .then(data => {
 
@@ -73,7 +74,7 @@ function PatientVitalsPage() {
 
   // 🔥 Fetch patient info
   useEffect(() => {
-    fetch(`http://localhost:5000/api/patient/${id}`)
+    fetch(`${API_URL}/patient/${id}`)
       .then(res => res.json())
       .then(data => setPatient(data))
       .catch(err => console.error(err));

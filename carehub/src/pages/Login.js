@@ -3,6 +3,7 @@ import { Box, TextField, Button, Typography, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config";
 
 function Login() {
 
@@ -12,7 +13,7 @@ function Login() {
 
   const handleLogin = async () => {
   try {
-    const res = await axios.post("http://localhost:5000/api/login", {
+    const res = await axios.post(`${API_URL}/login`, {
       email,
       password
     });

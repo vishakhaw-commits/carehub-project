@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { API_URL } from "../../config";
 import { Box, Typography, Grid, Button } from "@mui/material";
 import {
   LineChart,
@@ -38,7 +39,7 @@ function MyVitalsPage() {
 
   useEffect(() => {
     const fetchVitals = () => {
-      fetch("http://localhost:5000/api/cloud-vitals")
+      fetch(`${API_URL}/cloud-vitals`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Vitals Data:", data);

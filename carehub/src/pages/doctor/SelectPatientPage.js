@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -31,7 +32,7 @@ function PatientsPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/doctor/patients/${user.user_id}`)
+      .get(`${API_URL}/doctor/patients/${user.user_id}`)
       .then((res) => setPatients(res.data));
   }, []);
 

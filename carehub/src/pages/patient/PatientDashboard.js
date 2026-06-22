@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function PatientDashboard() {
@@ -44,7 +45,7 @@ function PatientDashboard() {
   useEffect(() => {
     if (user?.user_id) {
       axios
-        .get(`http://localhost:5000/api/patient/dashboard/${user.user_id}`)
+        .get(`${API_URL}/patient/dashboard/${user.user_id}`)
         .then((res) => {
           console.log("API DATA:", res.data);
           setDashboardData(res.data);

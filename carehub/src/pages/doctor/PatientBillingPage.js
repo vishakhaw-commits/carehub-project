@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +12,7 @@ function PatientBillingPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/doctor/bills/${patientId}`)
+      .get(`${API_URL}/doctor/bills/${patientId}`)
       .then((res) => setBills(res.data))
       .catch((err) => console.log(err));
   }, [patientId]);

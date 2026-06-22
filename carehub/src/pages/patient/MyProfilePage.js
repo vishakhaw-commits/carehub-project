@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function MyProfilePage() {
@@ -31,7 +32,7 @@ function MyProfilePage() {
   useEffect(() => {
 
     axios
-      .get(`http://localhost:5000/api/patient/profile/${user.user_id}`)
+      .get(`${API_URL}/patient/profile/${user.user_id}`)
       .then((res) => setProfile(res.data))
       .catch((err) => console.log(err));
 

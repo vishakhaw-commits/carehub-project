@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../config";
 
 function PrescriptionsPage() {
   const { id } = useParams(); // patient ID
@@ -16,7 +17,7 @@ function PrescriptionsPage() {
   // 🔹 Fetch prescriptions of selected patient
   const fetchPrescriptions = () => {
     axios
-      .get(`http://localhost:5000/api/prescriptions/${id}`)
+      .get(`${API_URL}/prescriptions/${id}`)
       .then((res) => setPrescriptions(res.data))
       .catch((err) => console.log(err));
   };
@@ -33,7 +34,7 @@ function PrescriptionsPage() {
     }
 
     axios
-      .post("http://localhost:5000/api/prescriptions", {
+      .post(`${API_URL}/prescriptions`, {
         doctor_id: user.user_id,
         patient_id: id,
         medication: medication,

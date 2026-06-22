@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button, Typography, MenuItem } from "@mui/material";
+import { BASE_URL } from "../config";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ function Signup() {
     setLoading(true); // START loading
 
     try {
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

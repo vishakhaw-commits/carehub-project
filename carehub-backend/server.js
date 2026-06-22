@@ -1,15 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./db");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 
 const app = express();
 const axios = require("axios");
-
-app.use(cors());
-app.use(express.json());
 
 const loadLocalEnv = () => {
   const envPath = path.join(__dirname, ".env");
@@ -32,6 +28,20 @@ const loadLocalEnv = () => {
 };
 
 loadLocalEnv();
+
+const db = require("./db");
+
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: allowedOrigins.length ? allowedOrigins : true,
+  })
+);
+app.use(express.json());
 
 const DEFAULT_SLOT_WINDOWS = {
   weekday: [
@@ -1246,6 +1256,12 @@ app.get("/api/cloud-vitals", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

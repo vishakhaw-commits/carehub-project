@@ -19,22 +19,16 @@ import {
 } from "@mui/material";
 import {
   Block,
-  CalendarMonth,
   CheckCircle,
   DeleteOutline,
-  EventAvailable,
   EventBusy,
-  Home,
-  Logout,
-  PeopleAlt,
   Refresh,
 } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/api";
+import { API_URL } from "../../config";
 
 const formatDateKey = (value) => {
   const year = value.getFullYear();
@@ -198,22 +192,14 @@ function SlotsPage() {
   };
 
   const navItemStyle = (path) => ({
-    mb: 1,
+    mb: 2,
     cursor: "pointer",
-    padding: "10px 12px",
+    padding: "8px 12px",
     borderRadius: "8px",
-    display: "flex",
-    alignItems: "center",
-    gap: 1,
-    color: "white",
     background:
       location.pathname === path
-        ? "rgba(14,165,233,0.24)"
+        ? "linear-gradient(90deg, #00c6ff, #0072ff)"
         : "transparent",
-    border:
-      location.pathname === path
-        ? "1px solid rgba(125,211,252,0.35)"
-        : "1px solid transparent",
   });
 
   return (
@@ -226,54 +212,48 @@ function SlotsPage() {
     >
       <Box
         sx={{
-          width: "260px",
+          width: "250px",
+          minHeight: "100vh",
           padding: "30px",
-          background: "rgba(255,255,255,0.08)",
-          backdropFilter: "blur(20px)",
+          background: "#0f2027",
           color: "white",
-          borderRight: "1px solid rgba(255,255,255,0.15)",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: 700 }}>
+        <Typography variant="h4" sx={{ mb: 4 }}>
           CareHub
         </Typography>
 
         <Typography sx={navItemStyle("/doctor")} onClick={() => navigate("/doctor")}>
-          <Home fontSize="small" /> Home
+          Home
         </Typography>
 
         <Typography
           sx={navItemStyle("/patientprofile")}
           onClick={() => navigate("/patientprofile")}
         >
-          <PeopleAlt fontSize="small" /> Patients
+          Patients
         </Typography>
 
         <Typography sx={navItemStyle("/slots")} onClick={() => navigate("/slots")}>
-          <CalendarMonth fontSize="small" /> Slots
+          Slots
         </Typography>
 
         <Typography
           sx={navItemStyle("/appointments")}
           onClick={() => navigate("/appointments")}
         >
-          <EventAvailable fontSize="small" /> Upcoming Appointments
+          Upcoming Appointments
         </Typography>
 
         <Button
-          fullWidth
           variant="contained"
-          startIcon={<Logout />}
           onClick={handleLogout}
           sx={{
             mt: 4,
-            background: "#0ea5e9",
-            textTransform: "none",
-            fontWeight: 700,
-            "&:hover": { background: "#0284c7" },
+            background: "linear-gradient(90deg, #00c6ff, #0072ff)",
           }}
         >
-          Logout
+          LOGOUT
         </Button>
       </Box>
 

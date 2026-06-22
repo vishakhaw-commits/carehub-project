@@ -19,9 +19,8 @@ import {
   Verified,
 } from "@mui/icons-material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
-
-const API_URL = "http://localhost:5000/api";
 
 const formatAmount = (amount) =>
   `Rs. ${Number(amount || 0).toLocaleString("en-IN", {

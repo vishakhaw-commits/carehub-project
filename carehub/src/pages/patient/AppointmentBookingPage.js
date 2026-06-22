@@ -19,11 +19,10 @@ import {
   PersonSearch,
 } from "@mui/icons-material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate, useLocation } from "react-router-dom";
-
-const API_URL = "http://localhost:5000/api";
 
 const formatDateKey = (value) => {
   const year = value.getFullYear();

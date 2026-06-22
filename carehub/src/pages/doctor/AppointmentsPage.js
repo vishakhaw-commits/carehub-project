@@ -3,6 +3,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../config";
 
 function AppointmentsPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function AppointmentsPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/doctor/appointments/${user.user_id}`)
+      .get(`${API_URL}/doctor/appointments/${user.user_id}`)
       .then((res) => setAppointments(res.data))
       .catch((err) => console.log(err));
   }, [user.user_id]);
@@ -38,14 +39,14 @@ function AppointmentsPage() {
   const completeAppointment = async (appointmentId) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/doctor/complete/${appointmentId}`
+        `${API_URL}/doctor/complete/${appointmentId}`
       );
 
       alert("Consultation completed");
 
       // reload appointments from backend
       const res = await axios.get(
-        `http://localhost:5000/api/doctor/appointments/${user.user_id}`
+        `${API_URL}/doctor/appointments/${user.user_id}`
       );
 
       setAppointments(res.data);

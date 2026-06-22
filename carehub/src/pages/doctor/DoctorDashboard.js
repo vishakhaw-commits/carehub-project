@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function DoctorDashboard() {
@@ -39,7 +40,7 @@ function DoctorDashboard() {
   // ⭐ Auto refresh dashboard every 5 seconds
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/doctor/dashboard/${user.user_id}`)
+      .get(`${API_URL}/doctor/dashboard/${user.user_id}`)
       .then((res) => setDashboardData(res.data));
   }, []);
 
