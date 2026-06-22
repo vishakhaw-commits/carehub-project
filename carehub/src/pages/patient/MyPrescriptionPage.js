@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +8,7 @@ function MyPrescriptionPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
 
   const [prescriptions, setPrescriptions] = useState([]);
 
@@ -29,11 +29,13 @@ function MyPrescriptionPage() {
   });
 
   useEffect(() => {
+    if (!user?.user_id) return;
+
     axios
       .get(`${API_URL}/patient/prescriptions/${user.user_id}`)
       .then((res) => setPrescriptions(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [user?.user_id]);
 
   return (
     <Box

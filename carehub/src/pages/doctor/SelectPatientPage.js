@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { API_URL } from "../../config";
@@ -28,13 +28,15 @@ function PatientsPage() {
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
 
   useEffect(() => {
+    if (!user?.user_id) return;
+
     axios
       .get(`${API_URL}/doctor/patients/${user.user_id}`)
       .then((res) => setPatients(res.data));
-  }, []);
+  }, [user?.user_id]);
 
   const patientCardStyle = {
     padding: "20px",

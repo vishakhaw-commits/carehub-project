@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function DoctorDashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,10 +39,12 @@ function DoctorDashboard() {
 
   // ⭐ Auto refresh dashboard every 5 seconds
   useEffect(() => {
+    if (!user?.user_id) return;
+
     axios
       .get(`${API_URL}/doctor/dashboard/${user.user_id}`)
       .then((res) => setDashboardData(res.data));
-  }, []);
+  }, [user?.user_id]);
 
   // 🔴 Show alert when abnormal vitals detected
   useEffect(() => {

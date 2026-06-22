@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { API_URL } from "../../config";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function PatientDashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -14,7 +14,7 @@ function PatientDashboard() {
     if (!user || user.role !== "patient") {
       navigate("/");
     }
-  }, []);
+  }, [navigate, user]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -52,7 +52,7 @@ function PatientDashboard() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [user?.user_id]);
 
   const cardStyle = {
     flex: 1,

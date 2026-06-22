@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { API_URL } from "../../config";
@@ -9,7 +9,7 @@ function MyProfilePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
 
   const [profile, setProfile] = useState(null);
 
@@ -30,13 +30,14 @@ function MyProfilePage() {
   });
 
   useEffect(() => {
+    if (!user?.user_id) return;
 
     axios
       .get(`${API_URL}/patient/profile/${user.user_id}`)
       .then((res) => setProfile(res.data))
       .catch((err) => console.log(err));
 
-  }, []);
+  }, [user?.user_id]);
 
   if (!profile) return null;
 

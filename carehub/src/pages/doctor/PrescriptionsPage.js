@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,19 +12,19 @@ function PrescriptionsPage() {
   const [medication, setMedication] = useState("");
   const [notes, setNotes] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useMemo(() => JSON.parse(localStorage.getItem("user")), []);
 
   // 🔹 Fetch prescriptions of selected patient
-  const fetchPrescriptions = () => {
+  const fetchPrescriptions = useCallback(() => {
     axios
       .get(`${API_URL}/prescriptions/${id}`)
       .then((res) => setPrescriptions(res.data))
       .catch((err) => console.log(err));
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchPrescriptions();
-  }, [id]);
+  }, [fetchPrescriptions]);
 
   // 🔹 Add new prescription
   const handleAddPrescription = () => {
