@@ -1237,10 +1237,11 @@ app.get("/api/cloud-vitals", async (req, res) => {
 
     // format all feeds for graphs
     const formatted = feeds.map((feed) => ({
-      time: new Date(feed.created_at).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      time: new Date(feed.created_at).toLocaleTimeString("en-IN", {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+  }),
       heart_rate: Number(feed.field1),
       oxygen_level: Number(feed.field2),
       temperature: Number(feed.field3),
@@ -1259,6 +1260,25 @@ app.get("/api/cloud-vitals", async (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
+
+// Simulate vitals and send to ThingSpeak
+setInterval(async () => {
+  const heartRate = Math.floor(Math.random() * 30) + 70;
+  const oxygen = Math.floor(Math.random() * 5) + 95;
+  const temperature = (Math.random() * 1 + 36).toFixed(1);
+
+  try {
+    await axios.get(
+      `https://api.thingspeak.com/update?api_key=${process.env.THINGSPEAK_API_KEY}&field1=${heartRate}&field2=${oxygen}&field3=${temperature}`
+    );
+
+    console.log(
+      `Vitals sent: ${heartRate}, ${oxygen}, ${temperature}`
+    );
+  } catch (err) {
+    console.error("ThingSpeak Update Error:", err.message);
+  }
+}, 20000); // every 20 seconds
 
 const PORT = process.env.PORT || 5000;
 
