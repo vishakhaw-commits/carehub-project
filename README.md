@@ -79,37 +79,37 @@ The platform provides separate dashboards for doctors and patients. Patients can
 
 ### Login Page
 
-![Login Page](screenshots/Login.png)
+![Login Page](Screenshots/Login.png)
 
 ### Doctor Dashboard
 
-![Doctor Dashboard](screenshots/DoctorDashboard.png)
+![Doctor Dashboard](Screenshots/DoctorDashboard.png)
 
 ### Patient Dashboard
 
-![Patient Dashboard](screenshots/PatientsDashboard.png)
+![Patient Dashboard](Screenshots/PatientsDashboard.png)
 
 ### Appointment Booking
 
-![Appointment Booking](screenshots/BookAppointments.png)
+![Appointment Booking](Screenshots/BookAppointments.png)
 
 ### Vitals Monitoring
 
-![Vitals Monitoring](screenshots/LiveVitals.png)
+![Vitals Monitoring](Screenshots/LiveVitals.png)
 
 ### Prescription Management
 
-![Prescription Management](screenshots/Prescriptionmonitoring.png)
+![Prescription Management](Screenshots/Prescriptionmonitoring.png)
 
-![Providing Prescription](screenshots/Prescriptions.png)
+![Providing Prescription](Screenshots/Prescriptions.png)
 
 ### Billing Module
 
-![Billing Module](screenshots/Billing.png)
+![Billing Module](Screenshots/Billing.png)
 
 ### Slots Management
 
-![Slots Management](screenshots/SlotsManagement.png)
+![Slots Management](Screenshots/SlotsManagement.png)
 
 ---
 
